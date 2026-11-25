@@ -39,19 +39,15 @@ canteen-sales-regression/
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Complete project documentation
 ├── canteen-sales-regression.pptx # Showcase presentation slides
-├── PRESENTATION_SCRIPT.md     # 10-minute viva presentation script
 │
 ├── data/
 │   ├── canteen_sales.csv      # Generated historical sales records (~6,000 orders)
 │   └── generate_data.py       # Deterministic, reproducible dataset generator
 │
-├── src/
-│   ├── data_processing.py     # Ingestion, validation, and zero-sales grid aggregation
-│   ├── analytics.py           # Business KPIs, rush hour stats, product rankings
-│   └── model.py               # Scikit-learn Pipeline & 7-day demand forecasting
-│
-└── tests/
-    └── test_model.py          # Pytest verification and smoke tests
+└── src/
+    ├── data_processing.py     # Ingestion, validation, and zero-sales grid aggregation
+    ├── analytics.py           # Business KPIs, rush hour stats, product rankings
+    └── model.py               # Scikit-learn Pipeline & 7-day demand forecasting
 ```
 
 ---
@@ -100,18 +96,6 @@ streamlit run app.py
 
 The application will automatically open in your default browser at:
 `http://localhost:8501`
-
----
-
-## 🧪 Running Verification Tests
-
-Run the complete automated test suite (schema validation, zero-sales aggregation, KPI math, ML pipeline training, and 7-day forecast verification):
-
-```powershell
-python -m pytest tests/test_model.py -v
-```
-
-All 6 test suites will run and pass within ~5 seconds.
 
 ---
 
