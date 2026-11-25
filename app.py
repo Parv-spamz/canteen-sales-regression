@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Sales Analytics & Demand Prediction
+Canteen Sales Regression - Sales Analytics & Demand Prediction
 Apple Liquid Glass / Glassmorphism Edition.
 
 Design Architecture:
@@ -42,7 +42,7 @@ from src.model import (
 
 # Page configuration (Strictly no emojis)
 st.set_page_config(
-    page_title="Campus Canteen Intelligence",
+    page_title="Canteen Sales Regression",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -546,7 +546,7 @@ CATEGORY_PALETTE = {
 # -------------------------------------------------------------
 head_left, head_right = st.columns([3, 1.2])
 with head_left:
-    st.markdown('<h1 class="app-title">Campus Canteen Intelligence</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="app-title">Canteen Sales Regression</h1>', unsafe_allow_html=True)
     st.markdown(
         '<p class="app-subtitle">Historical Sales Analytics and Machine Learning Demand Prediction for College Food Services</p>',
         unsafe_allow_html=True,
@@ -1147,7 +1147,7 @@ with tab_meta:
 st.markdown(
     """
     <div style="text-align: center; color: #64748B; font-size: 0.82rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid rgba(226, 232, 240, 0.8);">
-        Campus Canteen Intelligence • Built with Python, Pandas, Scikit-learn, Plotly & Streamlit • Academic Showcase Edition
+        Canteen Sales Regression • Built with Python, Pandas, Scikit-learn, Plotly & Streamlit • Academic Showcase Edition
     </div>
     """,
     unsafe_allow_html=True,

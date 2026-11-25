@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Synthetic Data Generator
+Canteen Sales Regression - Synthetic Data Generator
 Generates realistic historical canteen sales data (180 days, ~5,000 orders)
 with natural weekday/weekend patterns, meal-time peak hours, and product dynamics.
 

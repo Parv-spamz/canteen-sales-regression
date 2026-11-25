@@ -1,4 +1,4 @@
-# Campus Canteen Intelligence
+# Canteen Sales Regression
 ### Historical Sales Analytics & Machine Learning Demand Prediction for College Food Services
 
 An end-to-end Python analytics and Machine Learning application designed for college canteens. It analyzes historical sales records, visualizes peak hours and category revenues, and uses a scikit-learn `RandomForestRegressor` pipeline to forecast daily food item preparation targets over the next seven days.
@@ -33,12 +33,14 @@ An end-to-end Python analytics and Machine Learning application designed for col
 ## 📁 Project Structure
 
 ```
-campus-canteen-intelligence/
+canteen-sales-regression/
 │
 ├── app.py                     # Main Streamlit web application & UI
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Complete project documentation
+├── canteen-sales-regression.pptx # Showcase presentation slides
 ├── PRESENTATION_NOTES.md      # Showcase presentation script & viva answers
+├── PRESENTATION_SCRIPT.md     # 10-minute short presentation script
 │
 ├── data/
 │   ├── canteen_sales.csv      # Generated historical sales records (~6,000 orders)

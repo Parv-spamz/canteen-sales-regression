@@ -1,10 +1,10 @@
-# Campus Canteen Intelligence: Short Script
+# Canteen Sales Regression: Short Script
 
 About 10 minutes. Text in [SQUARE BRACKETS] means switch to the website (keep it open at http://localhost:8501) or back to the slides. The same text is in the slides' speaker notes.
 
 ## 1. Cover
 
-We are Parv Arora and Anshika Trikha. Our project is Campus Canteen Intelligence: a machine learning system that predicts how many portions of each food item a college canteen should cook over the next 7 days. It is a supervised regression project, because we predict a number, the units sold. The website is just the front end. The focus today is the machine learning behind it.
+We are Parv Arora and Anshika Trikha. Our project is Canteen Sales Regression: a machine learning system that predicts how many portions of each food item a college canteen should cook over the next 7 days. It is a supervised regression project, because we predict a number, the units sold. The website is just the front end. The focus today is the machine learning behind it.
 
 ## 2. The problem
 

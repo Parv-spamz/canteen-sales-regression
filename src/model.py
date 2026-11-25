@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Machine Learning Engine
+Canteen Sales Regression - Machine Learning Engine
 Implements Random Forest Regression with a scikit-learn Pipeline
 for daily food item demand prediction and 7-day kitchen forecasting.
 """

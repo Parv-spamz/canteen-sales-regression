@@ -1,10 +1,10 @@
-# Campus Canteen Intelligence – Presentation & Viva Guide
+# Canteen Sales Regression – Presentation & Viva Guide
 **Sales Analytics & Machine Learning Demand Prediction for College Food Services**
 
 ---
 
 ## 1. Project Introduction
-*“Good morning / afternoon evaluators and teachers. Today we present **Campus Canteen Intelligence**, a data analytics and machine learning solution designed to solve one of the most persistent operational bottlenecks in university campuses: balancing kitchen preparation with volatile student demand.”*
+*“Good morning / afternoon evaluators and teachers. Today we present **Canteen Sales Regression**, a data analytics and machine learning solution designed to solve one of the most persistent operational bottlenecks in university campuses: balancing kitchen preparation with volatile student demand.”*
 
 College canteens face a daily dilemma:
 - If they prepare **too much food**, excess items spoil, leading to severe financial loss and unhygienic food waste.
@@ -151,7 +151,7 @@ Instead, we perform a **chronological split**:
 
 | Step | Action on Screen | What to Say to the Evaluator |
 |---|---|---|
-| **1. Hook & Overview** | Open Dashboard header and executive KPI cards. | *"Good morning. Here is Campus Canteen Intelligence. Over the last 6 months, our canteen logged ₹5.1 Lakhs in revenue across 5,970 orders, with an average ticket size of ₹85."* |
+| **1. Hook & Overview** | Open Dashboard header and executive KPI cards. | *"Good morning. Here is Canteen Sales Regression. Over the last 6 months, our canteen logged ₹5.1 Lakhs in revenue across 5,970 orders, with an average ticket size of ₹85."* |
 | **2. Interactive Filtering** | Toggle Date Range or Category filter in the sidebar. | *"Every KPI and chart is completely reactive. If we filter exclusively for 'Breakfast', the entire dashboard recalculates instantly."* |
 | **3. Rush Hour Trends** | Scroll to 'Sales by Hour' and 'Daily Trend'. | *"Notice how the hourly chart automatically isolates three distinct spikes: Breakfast at 9 AM, Lunch peak at 12–1 PM, and Evening tea at 5 PM. Furthermore, the weekday chart proves that Saturday and Sunday sales drop sharply."* |
 | **4. Product Insights** | Switch to Tab 2: 'Product Insights'. | *"Here we compare volume velocity against revenue. Samosas generate the highest volume (nearly 2,000 units), but Veg Thalis generate the highest total revenue due to their ₹120 ticket price."* |

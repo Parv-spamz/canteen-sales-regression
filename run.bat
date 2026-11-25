@@ -1,7 +1,7 @@
 @echo off
-title Campus Canteen Intelligence
+title Canteen Sales Regression
 echo ========================================================
-echo   Launching Campus Canteen Intelligence Dashboard...
+echo   Launching Canteen Sales Regression Dashboard...
 echo ========================================================
 python -m streamlit run app.py
 pause

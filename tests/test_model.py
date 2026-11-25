@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Verification & Smoke Tests
+Canteen Sales Regression - Verification & Smoke Tests
 Verifies dataset loading, processing, KPI analytics,
 scikit-learn pipeline training, and 7-day demand forecasting.
 """

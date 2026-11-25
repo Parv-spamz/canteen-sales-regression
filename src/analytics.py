@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Analytics Engine
+Canteen Sales Regression - Analytics Engine
 Computes business KPIs, category metrics, product rankings,
 hourly rush patterns, and temporal revenue trends.
 """

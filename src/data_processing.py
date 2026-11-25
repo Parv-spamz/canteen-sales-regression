@@ -1,5 +1,5 @@
 """
-Campus Canteen Intelligence - Data Processing Module
+Canteen Sales Regression - Data Processing Module
 Handles CSV ingestion, data validation, temporal feature engineering,
 and daily item-demand aggregation with zero-sales handling.
 """
