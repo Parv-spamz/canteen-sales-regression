@@ -1,143 +1,102 @@
 # Canteen Sales Regression
-### Historical Sales Analytics & Machine Learning Demand Prediction for College Food Services
 
-An end-to-end Python analytics and Machine Learning application designed for college canteens. It analyzes historical sales records, visualizes peak hours and category revenues, and uses a scikit-learn `RandomForestRegressor` pipeline to forecast daily food item preparation targets over the next seven days.
+Sales analytics and 7-day demand forecasting for a college canteen.
 
----
+The project takes an order log, turns it into a per-item daily demand table, and trains a Random Forest to predict how many portions of each item the kitchen should prepare for the coming week. A Streamlit dashboard sits on top for exploring the sales history and reading the forecast.
 
-## 🚀 Key Features
+**Authors:** Parv Arora (2401420008) and Anshika Trikha (2401420044)
 
-1. **Executive KPI Dashboard:** Real-time metrics for Total Revenue, Total Orders, Units Sold, and Average Order Value (AOV).
-2. **Rush Hour & Temporal Analytics:** Interactive Plotly charts identifying morning breakfast rush, lunchtime surge, evening tea breaks, and weekday vs. weekend patterns.
-3. **Product & Category Insights:** Volume vs. revenue comparisons, department contribution shares, and payment method distributions.
-4. **Machine Learning 7-Day Demand Forecast:** Select any food item to generate a 7-day preparation schedule with estimated units, gross revenue, and peak prep days.
-5. **Data Leakage-Free ML Pipeline:** Scikit-learn `Pipeline` utilizing `OneHotEncoder`, `ColumnTransformer`, zero-sales demand imputation, and an 80/20 chronological train/test split.
-6. **Transparent Academic Architecture:** Full dataset inspection, feature importance breakdown, and downloadable sample CSV.
+## Results
 
----
+Evaluated on the last 36 days, which the model never sees during training.
 
-## 🛠️ Technology Stack
+| Model | R² | MAE (units) |
+|---|---|---|
+| Predict the overall mean | 0.00 | 2.67 |
+| Predict the per-item mean | 0.30 | 2.35 |
+| Linear regression | 0.62 | 1.79 |
+| **Random Forest (used)** | **0.716** | **1.53** |
 
-| Technology | Purpose |
+On average the forecast is off by about one and a half portions per item per day. Training R² is 0.81, so the gap to the test score is small.
+
+The three baseline rows are not produced by the app; they were computed separately on the same split to give the Random Forest figure some context.
+
+## How the model works
+
+**Data.** Real canteen billing data is not public, so `data/generate_data.py` produces a synthetic log with a fixed seed (42). It covers 180 days (1 May to 27 Oct 2024), 7 menu items and about 6,000 orders, with meal-time rushes, a weekend drop and semester seasonality built in. Running the script again gives the same file.
+
+**Demand table.** The log has one row per order, but the model needs one row per item per day. Orders are aggregated to 180 days × 7 items = 1,260 rows, and days where an item did not sell are filled with 0. Skipping that step would show the model only days with sales and push its predictions upward.
+
+**Features.**
+
+| Feature | Type |
 |---|---|
-| **Python 3.10+** | Main programming language |
-| **Pandas** | Data processing, feature extraction, and zero-demand aggregation |
-| **NumPy** | Numerical computations and reproducible sampling |
-| **Scikit-learn** | Supervised Machine Learning (`Pipeline`, `RandomForestRegressor`) |
-| **Streamlit** | Modern, interactive web dashboard UI |
-| **Plotly** | High-performance interactive charts and donut visualizations |
-| **CSV** | Lightweight, zero-setup tabular storage |
+| `item`, `category`, `day_name` | categorical, one-hot encoded |
+| `unit_price`, `month`, `day_of_week` | numeric |
+| `is_weekend` | binary |
 
----
+The target is `quantity_sold`, the units of an item sold in a day.
 
-## 📁 Project Structure
+**Split.** Chronological, not random: the first 144 days (1,008 rows) train the model and the last 36 days (252 rows) test it. A random shuffle would let future days leak into training.
 
-```
-canteen-sales-regression/
-│
-├── app.py                     # Main Streamlit web application & UI
-├── requirements.txt           # Python dependencies
-├── README.md                  # Complete project documentation
-├── canteen-sales-regression.pptx # Showcase presentation slides
-│
-├── data/
-│   ├── canteen_sales.csv      # Generated historical sales records (~6,000 orders)
-│   └── generate_data.py       # Deterministic, reproducible dataset generator
-│
-└── src/
-    ├── data_processing.py     # Ingestion, validation, and zero-sales grid aggregation
-    ├── analytics.py           # Business KPIs, rush hour stats, product rankings
-    └── model.py               # Scikit-learn Pipeline & 7-day demand forecasting
-```
+**Pipeline.** A single scikit-learn `Pipeline`: a `ColumnTransformer` for the encoding, followed by a `RandomForestRegressor` with 100 trees, `max_depth=12`, `min_samples_split=4`, `min_samples_leaf=2` and `random_state=42`. Predictions are clipped at zero and rounded to whole portions.
 
----
+## Dashboard
 
-## 📦 Installation & Setup (Windows / macOS / Linux)
+| Tab | Contents |
+|---|---|
+| Overview | Revenue, orders, units sold and average order value; revenue trend with a 7-day moving average; sales by hour and by weekday; revenue by category |
+| Product Insights | Volume against revenue per item, category shares, payment methods |
+| Demand Prediction | Pick an item to get a 7-day preparation schedule with units, expected revenue and the peak day |
+| Dataset and Model Details | Raw records, feature table, feature importances, sample CSV download |
 
-### 1. Clone or Open the Project Directory
-Ensure your terminal is located in the project root:
+The sidebar filters by date range, category and item, and every chart updates with it.
+
+## Getting started
+
+Requires Python 3.10 or newer.
+
 ```powershell
-cd "c:\Users\aropa\OneDrive\Desktop\ML\New folder"
-```
-
-### 2. (Optional) Create a Python Virtual Environment
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-
-### 3. Install Dependencies
-```powershell
+git clone https://github.com/Parv-spamz/canteen-sales-regression.git
+cd canteen-sales-regression
 pip install -r requirements.txt
-```
-
----
-
-## 🏃 Running the Application
-
-Launch the interactive dashboard with either of these commands:
-
-### Option A: Standard Python Module Command (Recommended on Windows)
-```powershell
 python -m streamlit run app.py
 ```
 
-### Option B: Quick Launcher Script
-- In PowerShell:
-  ```powershell
-  .\run.ps1
-  ```
-- Or double-click `run.bat` in Windows File Explorer!
+The app opens at `http://localhost:8501`. On Windows, `run.ps1` or `run.bat` does the same thing. To rebuild the dataset, run `python data/generate_data.py`.
 
-### Option C: If Streamlit is in your System PATH
-```powershell
-streamlit run app.py
+## Project layout
+
+```
+app.py                  Streamlit app
+requirements.txt
+data/
+  canteen_sales.csv     generated order log
+  generate_data.py      seeded dataset generator
+src/
+  data_processing.py    loading, validation, demand-table aggregation
+  analytics.py          KPIs, rush-hour stats, product rankings
+  model.py              pipeline, training, 7-day forecast
 ```
 
-The application will automatically open in your default browser at:
-`http://localhost:8501`
+## Menu in the dataset
 
----
-
-## 📊 Dataset Catalog & Specifications
-
-The dataset represents 180 days of canteen sales across 7 standard campus offerings:
-
-| Food Item | Category | Unit Price | Typical Demand Profile |
+| Item | Category | Price | Demand pattern |
 |---|---|---|---|
-| **Masala Dosa** | Breakfast | ₹60 | High morning peak (8–11 AM), moderate dinner |
-| **Veg Sandwich** | Snacks | ₹50 | Steady demand throughout day (10 AM–6 PM) |
-| **Paneer Roll** | Snacks | ₹80 | Lunch and evening snack favorite |
-| **Veg Thali** | Meals | ₹120 | Heavy lunch surge (12–2:30 PM), high revenue |
-| **Samosa** | Snacks | ₹25 | Highest volume item, peak evening tea rush |
-| **Cold Coffee** | Beverages | ₹70 | Midday and afternoon study refreshment |
-| **Lemonade** | Beverages | ₹40 | Midday hydration refresher |
+| Masala Dosa | Breakfast | ₹60 | Morning peak, smaller dinner bump |
+| Veg Sandwich | Snacks | ₹50 | Steady from 10 AM to 6 PM |
+| Paneer Roll | Snacks | ₹80 | Lunch and evening |
+| Veg Thali | Meals | ₹120 | Heavy lunch rush, highest revenue |
+| Samosa | Snacks | ₹25 | Highest volume, evening tea rush |
+| Cold Coffee | Beverages | ₹70 | Midday and afternoon |
+| Lemonade | Beverages | ₹40 | Midday |
 
-> **Academic Transparency Note:** The historical dataset (`data/canteen_sales.csv`) is synthetically generated using realistic academic scheduling parameters (`random_state=42`) for reproducibility and educational demonstration. It can be regenerated at any time using `python data/generate_data.py`.
+## Limitations
 
----
+- The data is synthetic, so the scores say how well the pipeline recovers the patterns we generated, not how it would do on a real canteen.
+- Features are calendar and item information only. Weather, exams, events and holidays are not modelled.
+- One fixed chronological split, no cross-validation or hyperparameter search.
 
-## 🧠 Machine Learning Model Details
+## Stack
 
-- **Algorithm:** `RandomForestRegressor` (100 estimators, max depth 12, random state 42).
-- **Target Variable:** `quantity_sold` (daily total units of a food item).
-- **Features Used:**
-  - `item` (Categorical, OneHotEncoded)
-  - `category` (Categorical, OneHotEncoded)
-  - `day_name` (Categorical, OneHotEncoded)
-  - `unit_price` (Numerical)
-  - `is_weekend` (Binary 0/1)
-  - `month` (Numerical)
-  - `day_of_week` (Numerical 0–6)
-- **Train / Test Split:** 80% chronological training (Days 1–144: 1,008 samples), 20% holdout testing (Days 145–180: 252 samples).
-- **Test Performance:**
-  - **Mean Absolute Error (MAE):** ~1.53 units (predictions are off by only ~1.5 portions on average).
-  - **R² Score:** ~0.716 (explains 71.6% of daily demand variance).
-- **Kitchen Output:** Non-negative integer predictions with expected gross revenue calculations for the upcoming 7 days.
-
----
-
-## 🎓 Showcase Presentation Guide
-
-For comprehensive viva preparation, explanation of MAE/R², anticipated evaluator questions, and a step-by-step presentation script, refer to:
-👉 [PRESENTATION_NOTES.md](PRESENTATION_NOTES.md)
+Python, pandas, NumPy, scikit-learn, Streamlit, Plotly.
