@@ -39,8 +39,7 @@ canteen-sales-regression/
 ├── requirements.txt           # Python dependencies
 ├── README.md                  # Complete project documentation
 ├── canteen-sales-regression.pptx # Showcase presentation slides
-├── PRESENTATION_NOTES.md      # Showcase presentation script & viva answers
-├── PRESENTATION_SCRIPT.md     # 10-minute short presentation script
+├── PRESENTATION_SCRIPT.md     # 10-minute viva presentation script
 │
 ├── data/
 │   ├── canteen_sales.csv      # Generated historical sales records (~6,000 orders)
